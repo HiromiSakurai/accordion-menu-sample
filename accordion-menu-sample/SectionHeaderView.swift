@@ -8,13 +8,9 @@
 
 import UIKit
 
-protocol SectionHeaderViewDelegate {
-    func toggleSection(header: SectionHeaderView, section: Int)
-}
-
 class SectionHeaderView: UITableViewHeaderFooterView {
 
-    var delegate: SectionHeaderViewDelegate?
+    var tappedHandler: ((Int) -> Void)?
     var section: Int?
 
     override init(reuseIdentifier: String?) {
@@ -26,16 +22,17 @@ class SectionHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func config(title: String, section: Int, delegate: SectionHeaderViewDelegate) {
+    func config(title: String, section: Int, tappedHandler: @escaping (Int) -> Void) {
         self.textLabel?.text = title
         self.section = section
-        self.delegate = delegate
+        self.tappedHandler = tappedHandler
     }
 
     @objc private func handleSelected(gestureRecognizer: UITapGestureRecognizer) {
-        if let header = gestureRecognizer.view as? SectionHeaderView, let section = header.section {
-            delegate?.toggleSection(header: self, section: section)
-        }
+        guard let headerView = gestureRecognizer.view as? SectionHeaderView,
+            let section = headerView.section,
+            let tappedHandler = tappedHandler else { return }
+        tappedHandler(section)
     }
 
     override func layoutSubviews() {

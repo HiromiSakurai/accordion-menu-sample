@@ -14,8 +14,8 @@ class MenuViewController: UIViewController {
 
     private var sections: [Section] = [Section(title: "Gender",
                                                values: [("MEN", false),
-                                                        ("MEN", false),
-                                                        ("MEN", false)],
+                                                        ("WOMEN", false),
+                                                        ("KIDS", false)],
                                                expanded: true),
                                        Section(title: "Size",
                                                values: [("X", false),
@@ -53,7 +53,23 @@ extension MenuViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuTableViewCell
+
         cell.titleLabel.text = sections[indexPath.section].values[indexPath.row].title
+
+        if self.sections[indexPath.section].values[indexPath.row].checked {
+            cell.checkBoxButton.setImage(checkedBoxImage, for: .normal)
+        } else {
+            cell.checkBoxButton.setImage(unCheckedBoxImage, for: .normal)
+        }
+
+        cell.tappedHandler = { [unowned self] in
+            if self.sections[indexPath.section].values[indexPath.row].checked {
+                cell.checkBoxButton.setImage(unCheckedBoxImage, for: .normal)
+            } else {
+                cell.checkBoxButton.setImage(checkedBoxImage, for: .normal)
+            }
+            self.sections[indexPath.section].values[indexPath.row].checked = !self.sections[indexPath.section].values[indexPath.row].checked
+        }
         return cell
     }
 }
@@ -70,9 +86,14 @@ extension MenuViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = SectionHeaderView()
-        headerView.config(title: sections[section].title,
-                          section: section,
-                          delegate: self)
+        headerView.config(title: sections[section].title, section: section) { [unowned self] section in
+            self.sections[section].expanded = !self.sections[section].expanded
+            self.menuTableView.beginUpdates()
+            for i in 0 ..< self.sections[section].values.count {
+                self.menuTableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+            }
+            self.menuTableView.endUpdates()
+        }
         return headerView
     }
 
@@ -80,16 +101,3 @@ extension MenuViewController: UITableViewDelegate {
         return 60
     }
 }
-
-extension MenuViewController: SectionHeaderViewDelegate {
-
-    func toggleSection(header: SectionHeaderView, section: Int) {
-        sections[section].expanded = !sections[section].expanded
-        menuTableView.beginUpdates()
-        for i in 0 ..< sections[section].values.count {
-            menuTableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-        }
-        menuTableView.endUpdates()
-    }
-}
-

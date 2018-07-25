@@ -14,6 +14,7 @@
 		5DCA0DD021085042009EF508 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA0DCF21085042009EF508 /* MenuTableViewCell.swift */; };
 		5DCA0DD2210867C4009EF508 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA0DD1210867C4009EF508 /* Section.swift */; };
 		5DCA0DD421086C81009EF508 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA0DD321086C81009EF508 /* SectionHeaderView.swift */; };
+		5DCA0DD62108BF33009EF508 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA0DD52108BF33009EF508 /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5DCA0DCF21085042009EF508 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		5DCA0DD1210867C4009EF508 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		5DCA0DD321086C81009EF508 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		5DCA0DD52108BF33009EF508 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				5DCA0DCF21085042009EF508 /* MenuTableViewCell.swift */,
 				5DCA0DD321086C81009EF508 /* SectionHeaderView.swift */,
 				5DCA0DD1210867C4009EF508 /* Section.swift */,
+				5DCA0DD52108BF33009EF508 /* Resources.swift */,
 				5DCA0DC121084A81009EF508 /* Main.storyboard */,
 				5DCA0DC421084A81009EF508 /* Assets.xcassets */,
 				5DCA0DC921084A82009EF508 /* Info.plist */,
@@ -143,6 +146,7 @@
 				5DCA0DC021084A81009EF508 /* MenuViewController.swift in Sources */,
 				5DCA0DD2210867C4009EF508 /* Section.swift in Sources */,
 				5DCA0DD421086C81009EF508 /* SectionHeaderView.swift in Sources */,
+				5DCA0DD62108BF33009EF508 /* Resources.swift in Sources */,
 				5DCA0DBE21084A81009EF508 /* AppDelegate.swift in Sources */,
 				5DCA0DD021085042009EF508 /* MenuTableViewCell.swift in Sources */,
 			);

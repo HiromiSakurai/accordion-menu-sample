@@ -10,7 +10,7 @@ import UIKit
 
 class MenuTableViewCell: UITableViewCell {
 
-    private var isChecked = false
+    var tappedHandler: (() -> Void)?
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -19,9 +19,9 @@ class MenuTableViewCell: UITableViewCell {
         return label
     }()
 
-    private lazy var checkBoxButton: UIButton = {
+    lazy var checkBoxButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "unchecked-checkbox"), for: .normal)
+        btn.setImage(unCheckedBoxImage, for: .normal)
         btn.addTarget(self, action: #selector(toggleCheckBox), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
@@ -34,12 +34,8 @@ class MenuTableViewCell: UITableViewCell {
     }
 
     @objc private func toggleCheckBox() {
-        if isChecked {
-            checkBoxButton.setImage(UIImage(named: "unchecked-checkbox"), for: .normal)
-        } else {
-            checkBoxButton.setImage(UIImage(named: "checked-checkbox"), for: .normal)
-        }
-        isChecked = !isChecked
+        guard let handler = tappedHandler else { return }
+        handler()
     }
 
     required init?(coder aDecoder: NSCoder) {
